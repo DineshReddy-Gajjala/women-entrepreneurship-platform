@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Browse and discover products and services from women-led businesses.">
+  <title>Marketplace | Women Entrepreneurs Platform</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">WE Platform ✦</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/mentorship">Mentorship</a>
+        <a href="/marketplace" class="active">Marketplace</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/login" class="btn-nav">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <span class="section-badge">Marketplace</span>
+      <h1>Premium 3D Product Experience</h1>
+      <p>Browse stunning products from women-led brands with immersive visuals and direct seller chat.</p>
+    </div>
+  </div>
+
+  <!-- Search + hero panel -->
+  <section class="container">
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search premium products, categories, or sellers…" oninput="filterProducts()" />
+    </div>
+    <div class="market-intro-grid">
+      <div class="glass-card premium-panel">
+        <span class="section-badge">Feature Spotlight</span>
+        <h2>Immersive 3D-style shopping</h2>
+        <p>Discover premium curated products with a glassmorphism card layout and a direct seller chat experience built for modern entrepreneurs.</p>
+      </div>
+    </div>
+    <div class="card-grid" id="productsGrid">
+      <p class="loading-placeholder">Loading premium products…</p>
+    </div>
+  </section>
+
+  <!-- Floating Chatbot -->
+  <button class="chatbot-fab" id="chatbotFab" aria-label="Open chatbot">💬</button>
+  <div class="chatbot-window hidden" id="chatbotWindow">
+    <div class="chatbot-header">
+      <h4>✨ Business Assistant</h4>
+      <button class="chatbot-close" id="chatbotClose">✕</button>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+      <div class="chat-msg bot">Hi! I'm your Entrepreneur Assistant. Ask me about starting a business, funding, or mentorship! 🙌</div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Type a question..." />
+      <button id="chatSend">Send</button>
+    </div>
+  </div>
+
+  <div class="product-chat-modal hidden" id="productChatModal" aria-hidden="true">
+    <div class="product-chat-header">
+      <div>
+        <span class="section-badge">Seller Chat</span>
+        <h3 id="productChatTitle">Chat with seller</h3>
+        <p class="product-chat-subtitle" id="productChatSubtitle">Ask questions about shipping, customization, or product details and get fast seller replies.</p>
+      </div>
+      <button class="product-chat-close" onclick="closeProductChatModal()" aria-label="Close chat">✕</button>
+    </div>
+    <div class="product-chat-body" id="productChatBody">
+      <div class="product-chat-system">Select a product to start a direct conversation with the seller.</div>
+    </div>
+    <div class="product-chat-input">
+      <input type="text" id="productChatInput" placeholder="Send a message to the seller…" />
+      <button type="button" onclick="sendProductChatMessage()">Send</button>
+    </div>
+  </div>
+
+  <script src="/static/js/main.js"></script>
+  <script>
+    // Load products on page load
+    document.addEventListener('DOMContentLoaded', loadProducts);
+  </script>
+</body>
+</html>

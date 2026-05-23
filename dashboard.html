@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Your personal dashboard with AI recommendations, progress, and success prediction.">
+  <title>Dashboard | Women Entrepreneurs Platform</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">WE Platform ✦</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/mentorship">Mentorship</a>
+        <a href="/marketplace">Marketplace</a>
+        <a href="/dashboard" class="active">Dashboard</a>
+        <a href="#" onclick="logout()" class="btn-nav">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Dashboard -->
+  <section class="dashboard-page">
+    <div class="container">
+
+      <!-- Header -->
+      <div class="dashboard-header">
+        <h1>Welcome, <span id="userName">Entrepreneur</span> 👋</h1>
+        <p>Here's your personalised business hub.</p>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats-row">
+        <div class="stat-card">
+          <div class="stat-value">3</div>
+          <div class="stat-label">AI Recommendations</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">5</div>
+          <div class="stat-label">Available Mentors</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">12</div>
+          <div class="stat-label">Marketplace Items</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">78%</div>
+          <div class="stat-label">Profile Complete</div>
+        </div>
+      </div>
+
+      <!-- Main grid -->
+      <div class="dashboard-grid">
+
+        <!-- AI Recommendations -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div class="icon">🤖</div>
+            <h3>AI Business Recommendations</h3>
+          </div>
+          <div id="recommendationsList">
+            <p style="color: var(--gray-400); font-size:.9rem;">Loading recommendations…</p>
+          </div>
+        </div>
+
+        <!-- Success Predictor -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div class="icon">📊</div>
+            <h3>Success Predictor</h3>
+          </div>
+          <form id="predictForm" onsubmit="handlePredict(event)">
+            <div class="form-group">
+              <label for="ideaTitle">Business Idea</label>
+              <input type="text" id="ideaTitle" placeholder="e.g., Online Bakery" required />
+            </div>
+            <div class="form-group">
+              <label for="ideaInvestment">Initial Investment (₹)</label>
+              <input type="number" id="ideaInvestment" placeholder="5000" required />
+            </div>
+            <div class="form-group">
+              <label for="ideaMarket">Market Size</label>
+              <select id="ideaMarket">
+                <option value="Small">Small</option>
+                <option value="Medium" selected>Medium</option>
+                <option value="Large">Large</option>
+              </select>
+            </div>
+            <button type="submit" class="btn-submit">Analyse Idea</button>
+          </form>
+          <div id="predictionResult" style="margin-top: 16px;"></div>
+        </div>
+
+        <!-- Profile -->
+        <div class="dash-card">
+          <div class="dash-card-header">
+            <div class="icon">👤</div>
+            <h3>Your Profile</h3>
+          </div>
+          <div id="profileInfo">
+            <p style="color: var(--gray-400); font-size:.9rem;">Loading profile…</p>
+          </div>
+        </div>
+
+        <!-- Wallet Section -->
+        <div class="dash-card wallet-section" style="grid-column: 1 / -1; margin-top: 20px;">
+          <div class="wallet-header">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <div class="icon" style="background: var(--primary-100); color: var(--primary-600); width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm); font-size: 1.2rem;">💼</div>
+              <h3 style="font-family: var(--font-heading); font-size: 1.25rem;">My Wallet</h3>
+            </div>
+            <p style="font-size: 0.85rem; color: var(--gray-500);">Saved profiles and interesting products.</p>
+          </div>
+          <div id="walletItemsList">
+            <p style="color: var(--gray-400); font-size:.9rem;">Loading wallet items…</p>
+          </div>
+        </div>
+
+        <!-- Entrepreneur Portal -->
+        <div class="dash-card entrepreneur-portal" id="entrepreneurPortal" style="grid-column: 1 / -1;">
+          <div id="portalContent">
+            <h2>Grow Your Business 🚀</h2>
+            <p>Post your business profile and images to be discovered by our community. Let visitors connect with you directly!</p>
+            <button class="btn-white" onclick="showProfileEditor()">Manage Business Profile</button>
+          </div>
+        </div>
+
+        <!-- Profile Editor Modal (Hidden) -->
+        <div class="modal-overlay hidden" id="profileModal">
+          <div class="modal-content">
+            <button class="modal-close" onclick="closeProfileModal()">✕</button>
+            <div class="modal-header">
+              <h2>My Business Profile</h2>
+              <p>Update how your business appears to visitors.</p>
+            </div>
+            <form id="profileForm" onsubmit="handleProfileUpdate(event)">
+              <div class="form-group">
+                <label>Business Name</label>
+                <input type="text" id="editBusinessName" placeholder="e.g., Eco Crafts" required />
+              </div>
+              <div class="form-group">
+                <label>Business Description</label>
+                <textarea id="editBusinessDesc" rows="3" placeholder="Tell us what you do..." required></textarea>
+              </div>
+              <div class="form-group">
+                <label>Business Image URL</label>
+                <input type="url" id="editBusinessImage" placeholder="https://images..." />
+                <small style="color: var(--gray-400);">Paste a link to your business cover photo.</small>
+              </div>
+              <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                <input type="checkbox" id="editIsEntrepreneur" style="width: auto;" />
+                <label style="margin-bottom: 0;">Show me on the platform</label>
+              </div>
+              <button type="submit" class="btn-submit">Save Profile ✨</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Floating Chatbot -->
+  <button class="chatbot-fab" id="chatbotFab" aria-label="Open chatbot">💬</button>
+  <div class="chatbot-window hidden" id="chatbotWindow">
+    <div class="chatbot-header">
+      <h4>✨ Business Assistant</h4>
+      <button class="chatbot-close" id="chatbotClose">✕</button>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+      <div class="chat-msg bot">Hi! I'm your Entrepreneur Assistant. Ask me about starting a business, funding, or mentorship! 🙌</div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Type a question..." />
+      <button id="chatSend">Send</button>
+    </div>
+  </div>
+
+  <script src="/static/js/main.js"></script>
+  <script>
+    // Load dashboard data on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      loadProfile();
+      loadRecommendations();
+      loadWalletItems();
+    });
+  </script>
+</body>
+</html>

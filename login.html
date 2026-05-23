@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Login or Sign Up to the Women Entrepreneurs Platform.">
+  <title>Login | Women Entrepreneurs Platform</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">WE Platform ✦</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/mentorship">Mentorship</a>
+        <a href="/marketplace">Marketplace</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/login" class="active">Login</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Auth Section -->
+  <section class="auth-page">
+    <div class="auth-card">
+      <h2>Welcome Back 👋</h2>
+      <p class="auth-subtitle">Start your entrepreneurial journey today.</p>
+
+      <!-- Tabs: Login / Sign Up -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="tabLogin" onclick="switchTab('login')">Login</button>
+        <button class="auth-tab" id="tabSignup" onclick="switchTab('signup')">Sign Up</button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="loginEmail">Email</label>
+          <input type="email" id="loginEmail" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" placeholder="••••••••" required />
+        </div>
+        <button type="submit" class="btn-submit">Login</button>
+      </form>
+
+      <!-- Signup Form -->
+      <form id="signupForm" class="hidden" onsubmit="handleSignup(event)">
+        <div class="form-group">
+          <label for="signupName">Full Name</label>
+          <input type="text" id="signupName" placeholder="Jane Doe" required />
+        </div>
+        <div class="form-group">
+          <label for="signupEmail">Email</label>
+          <input type="email" id="signupEmail" placeholder="you@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="signupPassword">Password</label>
+          <input type="password" id="signupPassword" placeholder="••••••••" required />
+        </div>
+        <div class="form-group">
+          <label for="signupInterests">Interests</label>
+          <select id="signupInterests">
+            <option value="">Select your area of interest</option>
+            <option value="Retail">Retail & E-commerce</option>
+            <option value="EdTech">Education & EdTech</option>
+            <option value="AgriTech">Agriculture & AgriTech</option>
+            <option value="HealthTech">Health & Wellness</option>
+            <option value="Fashion">Fashion & Design</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-submit">Create Account</button>
+      </form>
+
+      <div id="authMessage" class="auth-message hidden"></div>
+    </div>
+  </section>
+
+  <!-- Floating Chatbot -->
+  <button class="chatbot-fab" id="chatbotFab" aria-label="Open chatbot">💬</button>
+  <div class="chatbot-window hidden" id="chatbotWindow">
+    <div class="chatbot-header">
+      <h4>✨ Business Assistant</h4>
+      <button class="chatbot-close" id="chatbotClose">✕</button>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+      <div class="chat-msg bot">Hi! I'm your Entrepreneur Assistant. Ask me about starting a business, funding, or mentorship! 🙌</div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Type a question..." />
+      <button id="chatSend">Send</button>
+    </div>
+  </div>
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>

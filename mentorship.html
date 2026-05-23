@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find and connect with experienced business mentors on the Women Entrepreneurs Platform.">
+  <title>Mentorship | Women Entrepreneurs Platform</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">WE Platform ✦</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+      <div class="nav-links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/mentorship" class="active">Mentorship</a>
+        <a href="/marketplace">Marketplace</a>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/login" class="btn-nav">Get Started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="container">
+      <span class="section-badge">Mentorship</span>
+      <h1>Learn from the Best 🧑‍🏫</h1>
+      <p>Connect with successful entrepreneurs and industry experts who can accelerate your growth.</p>
+    </div>
+  </div>
+
+  <!-- Page Content -->
+  <section class="container">
+    <!-- Search / Filter -->
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="mentorSearch" placeholder="Search by name or expertise (e.g. 'Tech', 'Marketing')..." oninput="filterMentors()" />
+    </div>
+
+    <!-- Mentors Grid -->
+    <div class="card-grid" id="mentorsGrid">
+      <p style="color: var(--gray-400); text-align:center; grid-column: 1 / -1;">Loading mentors…</p>
+    </div>
+  </section>
+
+  <!-- Connect Modal -->
+  <div class="modal-overlay hidden" id="connectModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeModal">✕</button>
+      <div class="modal-header">
+        <h2 id="modalTitle">Connect with Mentor</h2>
+        <p id="modalSubtitle">Fill out the form below to send a connection request.</p>
+      </div>
+      <form id="connectForm">
+        <input type="hidden" id="targetMentor" />
+        <div class="form-group" id="visitorEmailGroup">
+          <label for="visitorEmail">Your Email Address</label>
+          <input type="email" id="visitorEmail" placeholder="name@example.com" required />
+        </div>
+        <div class="form-group">
+          <label for="connectMessage">Message</label>
+          <textarea id="connectMessage" rows="4" placeholder="Briefly describe what you'd like to discuss..." required></textarea>
+        </div>
+        <button type="submit" class="btn-submit" id="submitConnect">Send Request ✨</button>
+      </form>
+      <div id="modalMessage" class="auth-message hidden"></div>
+    </div>
+  </div>
+
+  <!-- Floating Chatbot -->
+  <button class="chatbot-fab" id="chatbotFab" aria-label="Open chatbot">💬</button>
+  <div class="chatbot-window hidden" id="chatbotWindow">
+    <div class="chatbot-header">
+      <h4>✨ Business Assistant</h4>
+      <button class="chatbot-close" id="chatbotClose">✕</button>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+      <div class="chat-msg bot">Hi! I'm your Entrepreneur Assistant. Ask me about starting a business, funding, or mentorship! 🙌</div>
+    </div>
+    <div class="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Type a question..." />
+      <button id="chatSend">Send</button>
+    </div>
+  </div>
+
+  <script src="/static/js/main.js"></script>
+  <script>
+    // Load mentors on page load
+    document.addEventListener('DOMContentLoaded', loadMentors);
+  </script>
+</body>
+</html>
